@@ -5,8 +5,11 @@ const port=process.env.PORT || 3000;
 const dotenv=require("dotenv");
 dotenv.config();
 require("./db/connect");
-const router=require("./route/blog");
-app.use(router);
+const blogRoute=require("./route/blog");
+const categoryRoute=require("./route/category");
+app.use(blogRoute);
+app.use(categoryRoute);
+
 
 
 
