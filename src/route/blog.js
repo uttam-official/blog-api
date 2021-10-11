@@ -1,9 +1,10 @@
 const router=require("express").Router();
 const Blog=require("../model/Blog");
+const auth =require('../middleware/auth');
 
 
 // CREATE NEW BLOG
-router.post("/api/blog",async (req,res)=>{
+router.post("/api/blog",auth,async (req,res)=>{
     try{
         const blog= new Blog(req.body);
         const data=await blog.save();
@@ -32,7 +33,7 @@ router.get("/api/blog/:id",async (req,res)=>{
     }
 });
 //UPDATE A BLOG
-router.patch("/api/blog/:id",async (req,res)=>{
+router.patch("/api/blog/:id",auth,async (req,res)=>{
     try{
         const _id=req.params.id;
         const data=await Blog.findByIdAndUpdate(_id,req.body,{new:true});
@@ -42,7 +43,7 @@ router.patch("/api/blog/:id",async (req,res)=>{
     }
 });
 //DELETE A BLOG
-router.delete("/api/blog/:id",async (req,res)=>{
+router.delete("/api/blog/:id",auth,async (req,res)=>{
     try{
         const _id=req.params.id;
         const data=await Blog.findByIdAndDelete(_id,{new:true});

@@ -7,11 +7,12 @@ dotenv.config();
 require("./db/connect");
 const blogRoute=require("./route/blog");
 const categoryRoute=require("./route/category");
+const adminRoute=require("./route/admin");
+const auth =require('./middleware/auth');
+
 app.use(blogRoute);
 app.use(categoryRoute);
-
-
-
+app.use(adminRoute);
 
 
 app.listen(port,()=>{

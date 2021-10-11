@@ -1,7 +1,9 @@
 const router=require("express").Router();
 const Category=require("../model/Category");
+const auth =require('../middleware/auth');
+
 // add category
-router.post("/api/category",async (req,res)=>{
+router.post("/api/category",auth,async (req,res)=>{
     try{
         const category= new Category(req.body);
         const data=await category.save();
@@ -30,7 +32,7 @@ router.get("/api/category/:id",async (req,res)=>{
     }
 });
 //update category
-router.patch("/api/category/:id",async (req,res)=>{
+router.patch("/api/category/:id",auth,async (req,res)=>{
     try{
         const _id=req.params.id;
         const data=await Category.findByIdAndUpdate(_id,req.body,{new:true});
@@ -40,7 +42,7 @@ router.patch("/api/category/:id",async (req,res)=>{
     }
 });
 //delete category
-router.delete("/api/category/:id",async (req,res)=>{
+router.delete("/api/category/:id",auth,async (req,res)=>{
     try{
         const _id=req.params.id;
         const data=await Category.findByIdAndDelete(_id,{new:true});
