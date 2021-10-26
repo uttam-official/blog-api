@@ -1,5 +1,9 @@
 const mongoose=require("mongoose");
 const blogSchema=new mongoose.Schema({
+    imagelink:{
+        type:String,
+        required:true
+    },
     title:{
         type:String,
         trim:true,
@@ -12,7 +16,7 @@ const blogSchema=new mongoose.Schema({
     category:{
         type:Array
     },
-    auther:{ //Admin username
+    author:{ //Admin username
         type:String,
         required:true
     }
