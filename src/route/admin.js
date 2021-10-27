@@ -28,7 +28,8 @@ router.post("/api/admin/registration",async (req,res)=>{
             
             const token= jwt.sign({admin_id:admin._id,user:username},process.env.JWT_SECRET_KEY,{expiresIn:"2h"});
             admin.token=token;
-            res.status(201).send(admin);
+            const {password,...others}=admin._doc;
+            res.status(201).send(others);
         }
     }catch(err){
         res.status(500).json({"message":`Error Occured ${err}`});
@@ -44,7 +45,8 @@ router.post("/api/admin/login",async (req,res)=>{
         if(admin && await bcrypt.compare(password,admin.password)){
             const token= jwt.sign({admin_id:admin._id,user:username},process.env.JWT_SECRET_KEY,{expiresIn:"2h"});
             admin.token=token;
-            res.status(200).send(admin);
+            const {password,...others}=admin._doc;
+            res.status(200).send(others);
         }else{
             res.status(400).json({"message":"Invalid Credentials"});
         }
