@@ -39,7 +39,7 @@ router.post("/api/admin/login",async (req,res)=>{
     try{
         const {username,password} = req.body;
         if(!(username && password)){
-            res.status(400).json({"message":"username and password required"});
+            res.status(403).json({"message":"username and password required"});
         }
         const admin=await Admin.findOne({username:username});
         if(admin && await bcrypt.compare(password,admin.password)){
