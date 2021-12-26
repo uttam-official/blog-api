@@ -48,7 +48,7 @@ router.post("/api/admin/login",async (req,res)=>{
             const {password,...others}=admin._doc;
             res.status(200).send(others);
         }else{
-            res.status(400).json({"message":"Invalid Credentials"});
+            res.json({"message":"Invalid Credentials"});
         }
     }catch(err){
         res.status(500).json({"message":`Error Occured ${err}`});
