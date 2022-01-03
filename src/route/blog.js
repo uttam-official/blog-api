@@ -4,7 +4,7 @@ const auth =require('../middleware/auth');
 
 
 // CREATE NEW BLOG
-router.post("/api/blog",async (req,res)=>{
+router.post("/api/blog",auth,async (req,res)=>{
     try{
         const blog= new Blog(req.body);
         const data=await blog.save();
